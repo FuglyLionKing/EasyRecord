@@ -94,6 +94,7 @@ public class MiniPlayer extends LinearLayout {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 //To change body of implemented methods use File | Settings | File Templates.
+                player.seekTo(i);
             }
 
             @Override
@@ -143,13 +144,13 @@ public class MiniPlayer extends LinearLayout {
     }
 
     private void stopUpdate(){
-        timer.cancel();
-        timer.purge();
+//        timer.cancel();
+//        timer.purge();
     }
 
     private void startUpdate(){
-        stopUpdate();
-        timer.schedule(updater, 1000, player.getDuration() - player.getCurrentPosition());
+//        stopUpdate();
+//        timer.schedule(updater, 1000, player.getDuration() - player.getCurrentPosition());
     }
 
     private void updateProgress(){

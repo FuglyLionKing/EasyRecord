@@ -8,16 +8,13 @@ import android.os.Environment;
 import android.util.Log;
 
 public class MicRecorder {
-    final MediaRecorder recorder = new MediaRecorder();
+    private MediaRecorder recorder;
+    private int outputFormat;
+    private int audioEncoder;
 
-   public MicRecorder(int outputFormat, int audioEncoder){
-       try{
-       recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-       recorder.setOutputFormat(outputFormat);//(MediaRecorder.OutputFormat.THREE_GPP);
-       recorder.setAudioEncoder(audioEncoder);//(MediaRecorder.AudioEncoder.AMR_NB);
-       }catch (Exception e){
-           Log.d("MINE", e.toString());
-       }
+    public MicRecorder(int outputFormat, int audioEncoder){
+        this.outputFormat = outputFormat;
+        this.audioEncoder = audioEncoder;
    }
 
     /**
@@ -33,6 +30,11 @@ public class MicRecorder {
             throw new IOException("Path to file could not be created.");
         }
 
+        recorder = new MediaRecorder();
+
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(outputFormat);//(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setAudioEncoder(audioEncoder);//(MediaRecorder.AudioEncoder.AMR_NB);
 
         recorder.setOutputFile(f.getAbsolutePath());
         recorder.prepare();
@@ -44,7 +46,8 @@ public class MicRecorder {
      */
     public void stop(){
         recorder.stop();
-        recorder.release();
+        recorder.reset();
+//        recorder.release();
     }
 
 }

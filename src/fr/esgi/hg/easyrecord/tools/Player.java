@@ -1,7 +1,5 @@
 package fr.esgi.hg.easyrecord.tools;
 
-import android.content.Context;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 
 import java.io.File;
@@ -15,20 +13,23 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public class Player {
-    private MediaPlayer mp = new MediaPlayer();
+    private MediaPlayer mediaPlayer;
     private boolean prepared = false;
 
 
     public void start(File f){
         if(null == f || !f.exists())
             throw new IllegalArgumentException("In order to play a file it needs to exist");
+
+        mediaPlayer = new MediaPlayer();
+
         try {
-            mp.setDataSource(f.getAbsolutePath());
-            mp.prepare();
+            mediaPlayer.setDataSource(f.getAbsolutePath());
+            mediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mp.start();
+        mediaPlayer.start();
         prepared = true;
     }
 
@@ -36,27 +37,27 @@ public class Player {
         if(!prepared)
             return;
 
-        if(mp.isPlaying())
-            mp.pause();
+        if(mediaPlayer.isPlaying())
+            mediaPlayer.pause();
     }
 
     public void resume(){
         if(!prepared)
             return;
 
-        mp.start();
+        mediaPlayer.start();
     }
 
     public void stop(){
         if(!prepared)
             return;
-        mp.stop();
-        mp.release();
-        mp.reset();
+        mediaPlayer.stop();
+        mediaPlayer.reset();
+        mediaPlayer.release();
         prepared = false;
     }
 
-    public void seekTo(float wherePct){
+    public void seekToPct(float wherePct){
         if(!prepared)
             return;
 
@@ -65,32 +66,45 @@ public class Player {
         else if(1f < wherePct)
             wherePct = 1f;
 
-        mp.seekTo((int)(mp.getDuration() * wherePct));
+        mediaPlayer.seekTo((int) (mediaPlayer.getDuration() * wherePct));
 
     }
 
+    public void seekTo(int where){
+        if(!prepared)
+            return;
+
+        if(where < 0)
+            where = 0;
+        if(where > mediaPlayer.getDuration())
+            where = mediaPlayer.getDuration();
+
+        mediaPlayer.seekTo(where);
+    }
+
     public float getCurrentPositionPct(){
-        return prepared  && 0 != mp.getDuration() ? ((1f / mp.getDuration()) * mp.getCurrentPosition()) : 0;
+        return prepared  && 0 != mediaPlayer.getDuration() ? ((1f / mediaPlayer.getDuration()) * mediaPlayer.getCurrentPosition()) : 0;
     }
 
     public void setVolume(float vol){
         if(!prepared)
             return;
 
-        mp.setVolume(vol, vol);
+        mediaPlayer.setVolume(vol, vol);
     }
 
     public boolean isPlaying(){
-        return prepared ? mp.isPlaying() : false;
+        return prepared ? mediaPlayer.isPlaying() : false;
     }
 
 
     public int getCurrentPosition(){
-        return prepared ? mp.getCurrentPosition() : 0;
+        return prepared ? mediaPlayer.getCurrentPosition() : 0;
     }
 
     public int getDuration(){
-        return prepared ? mp.getDuration() : 0;
+        return prepared ? mediaPlayer.getDuration() : 0;
+
     }
 
 }
