@@ -27,7 +27,7 @@ public class RecorderFragment extends Fragment {
         Button x = (Button) rootView.findViewById(R.id.startrecord);
         MiniPlayer player = (MiniPlayer) rootView.findViewById(R.id.player);
 
-        final File f = new File(Environment.getDataDirectory().getAbsolutePath()+File.pathSeparator+"myrecTmp");
+        final File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"myrecTmp");
         final MicRecorder recorder = new MicRecorder(MediaRecorder.OutputFormat.THREE_GPP, MediaRecorder.AudioEncoder.AMR_NB);
 
 

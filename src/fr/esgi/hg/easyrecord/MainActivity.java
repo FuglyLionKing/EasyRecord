@@ -17,6 +17,7 @@ public class MainActivity extends FragmentActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -48,6 +49,9 @@ public class MainActivity extends FragmentActivity implements
             }
         });
 
+        }catch(Exception e){
+            Log.d("MINE", e.toString());
+        }
     }
 
     @Override
