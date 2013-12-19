@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import fr.esgi.hg.easyrecord.adapter.TabsPagerAdapter;
 
 public class MainActivity extends FragmentActivity implements
@@ -46,6 +47,7 @@ public class MainActivity extends FragmentActivity implements
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+
     }
 
     @Override
