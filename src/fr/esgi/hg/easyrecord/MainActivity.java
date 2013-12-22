@@ -3,9 +3,13 @@ package fr.esgi.hg.easyrecord;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import fr.esgi.hg.easyrecord.adapter.TabsPagerAdapter;
+
+import java.io.File;
 
 public class MainActivity extends FragmentActivity implements
         ActionBar.TabListener {
@@ -14,14 +18,20 @@ public class MainActivity extends FragmentActivity implements
     private TabsPagerAdapter tabsAdapter;
     private ActionBar actionBar;
 
+    private PlayerFragment player;
+    private RecorderFragment recorder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
-        tabsAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+
+        tabsAdapter = new TabsPagerAdapter(fragmentManager);
 
         viewPager.setAdapter(tabsAdapter);
         actionBar.setHomeButtonEnabled(false);
@@ -47,6 +57,30 @@ public class MainActivity extends FragmentActivity implements
             }
         });
 
+        //retrieve last created fragment instance from the adapter
+        //and listen for sound recorded in order to update the player's list
+        tabsAdapter.setOnfragmentInstiated(new TabsPagerAdapter.OnFragmentInstantiated() {
+            @Override
+            public void execute(int index, Fragment frag) {
+                switch (index){
+                    case 0:
+                        recorder = (RecorderFragment) frag;
+                        break;
+                    case 1:
+                        player = (PlayerFragment) frag;
+                        break;
+                }
+
+                if(null != recorder && null != player){
+                    recorder.setOnSoundRecorded(new RecorderFragment.recordHandler() {
+                        @Override
+                        public void onSoundRecorded(File file) {
+                            player.updateRecords();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override

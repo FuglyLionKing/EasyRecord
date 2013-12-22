@@ -21,6 +21,11 @@ public class Player {
         if(null == f || !f.exists())
             throw new IllegalArgumentException("In order to play a file it needs to exist");
 
+        //played something before already
+        if(null != mediaPlayer){
+           stop();
+        }
+
         mediaPlayer = new MediaPlayer();
 
         try {

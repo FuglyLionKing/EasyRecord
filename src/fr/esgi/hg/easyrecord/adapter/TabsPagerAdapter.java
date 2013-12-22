@@ -8,9 +8,11 @@ import fr.esgi.hg.easyrecord.PlayerFragment;
 import fr.esgi.hg.easyrecord.RecorderFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
+    //TODO make resource
     private String[] tabsNames = { "Recorder", "Player"};
+    private OnFragmentInstantiated onFragmentInstantiated;
 
-	public TabsPagerAdapter(FragmentManager fm) {
+    public TabsPagerAdapter(FragmentManager fm) {
 		super(fm);
 	}
 
@@ -21,11 +23,19 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public Fragment getItem(int index) {
 
-		switch (index) {
+        Fragment frag;
+
+        switch (index) {
 		case 0:
-			return new RecorderFragment();
+            frag = new RecorderFragment();
+            if(null != onFragmentInstantiated)
+                onFragmentInstantiated.execute(index,frag);
+			return frag;
 		case 1:
-			return new PlayerFragment();
+            frag = new PlayerFragment();
+            if(null != onFragmentInstantiated)
+                onFragmentInstantiated.execute(index,frag);
+            return frag;
 		}
 
 		return null;
@@ -35,5 +45,13 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	public int getCount() {
 		return tabsNames.length;
 	}
+
+    public void setOnfragmentInstiated(OnFragmentInstantiated fragmentInstantiated){
+        this.onFragmentInstantiated = fragmentInstantiated;
+    }
+
+    public static interface OnFragmentInstantiated{
+        void execute(int index, Fragment frag);
+    }
 
 }

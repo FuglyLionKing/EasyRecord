@@ -2,10 +2,7 @@ package fr.esgi.hg.easyrecord;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -14,7 +11,6 @@ import fr.esgi.hg.easyrecord.widgets.MiniPlayer;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerFragment extends Fragment {
 
@@ -23,6 +19,10 @@ public class PlayerFragment extends Fragment {
 
     private ArrayAdapter<File> recordsAdapter;
     private ArrayList<File> records;
+
+    //TODO make resource
+    private static String[] menuItems = {"Edit", "View information", "Delete"};
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,31 +47,60 @@ public class PlayerFragment extends Fragment {
             }
         });
 
-        recordsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-        });
-
-
+        //makes this fragment handle the menu on long press
+        //of the record list (prevent from subclassing the listview)
+        registerForContextMenu(recordsList);
 
 		return rootView;
 	}
 
+private     File selectedRecord;
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if(R.id.recordsList == v.getId()){
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+            menu.setHeaderTitle((selectedRecord = records.get(info.position)).getName());
+
+            for(int i = 0; i < menuItems.length; ++i){
+                menu.add(Menu.NONE, i,i,menuItems[i]);
+            }
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case 0:
+                //edit
+                break;
+            case 1:
+                //info
+                break;
+            case 2:
+                //delete
+                FileTools.delete(selectedRecord);
+//                records.remove(selectedRecord);
+                recordsAdapter.remove(selectedRecord);
+                break;
+
+        }
+
+        return true;
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        initialize();
+        updateRecords();
     }
 
-    private void initialize(){
-        records.clear();
-        records.addAll(FileTools.getAllRecords());
 
+    public void updateRecords(){
+//        records.clear();
+//        records.addAll(FileTools.getAllRecords());
+        recordsAdapter.clear();
+        recordsAdapter.addAll(FileTools.getAllRecords());
     }
 
-    public void uddateRecords(){
-        initialize();
-    }
+
 }
