@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
         >
 
-<ListView android:layout_width="wrap_content"
+<ListView android:layout_width="match_parent"
           android:layout_height="wrap_content"
-
-        >
-
-
-</ListView>
-<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="There's a list above me and I ain't even lying tya (by the way that's supposed to be the player tab or sumthin)"
-        android:textColor="#FEA"/>
+          android:id="@+id/recordsList"
+          android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
+          android:layout_alignBottom="@+id/player"
+        />
 
 
-</LinearLayout>
+    <fr.esgi.hg.easyrecord.widgets.MiniPlayer
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/player"
+            android:layout_alignLeft="@+id/recordsList" android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

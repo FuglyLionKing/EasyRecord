@@ -113,7 +113,7 @@ public class MiniPlayer extends LinearLayout {
     }
 
 
-    private void play(){
+    public void play(){
         if(null != file && file.exists())
             player.start(file);
 
@@ -123,19 +123,19 @@ public class MiniPlayer extends LinearLayout {
         startUpdate();
     }
 
-    private void pause(){
+    public void pause(){
         player.pause();
 
         stopUpdate();
     }
 
-    private void resume(){
+    public void resume(){
         player.resume();
 
         startUpdate();
     }
 
-    private void stop(){
+    public void stop(){
         player.stop();
         seekbar.setProgress(0);
 
@@ -143,12 +143,12 @@ public class MiniPlayer extends LinearLayout {
 
     }
 
-    private void stopUpdate(){
+    public void stopUpdate(){
 //        timer.cancel();
 //        timer.purge();
     }
 
-    private void startUpdate(){
+    public void startUpdate(){
 //        stopUpdate();
 //        timer.schedule(updater, 1000, player.getDuration() - player.getCurrentPosition());
     }

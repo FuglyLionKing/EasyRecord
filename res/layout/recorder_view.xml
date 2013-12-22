@@ -26,14 +26,4 @@
             android:text="Ama button"
             android:id="@+id/startrecord"
             />
-
-
-
-    <fr.esgi.hg.easyrecord.widgets.MiniPlayer
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/player"
-       />
-
-
 </LinearLayout>

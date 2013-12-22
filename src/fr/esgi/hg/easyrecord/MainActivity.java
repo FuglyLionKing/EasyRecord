@@ -5,7 +5,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import fr.esgi.hg.easyrecord.adapter.TabsPagerAdapter;
 
 public class MainActivity extends FragmentActivity implements
@@ -17,7 +16,6 @@ public class MainActivity extends FragmentActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -49,9 +47,6 @@ public class MainActivity extends FragmentActivity implements
             }
         });
 
-        }catch(Exception e){
-            Log.d("MINE", e.toString());
-        }
     }
 
     @Override
