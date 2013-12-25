@@ -15,6 +15,7 @@ import java.io.IOException;
 public class Player {
     private MediaPlayer mediaPlayer;
     private boolean prepared = false;
+    private MediaPlayer.OnCompletionListener completitionListener;
 
 
     public void start(File f){
@@ -27,6 +28,8 @@ public class Player {
         }
 
         mediaPlayer = new MediaPlayer();
+
+        mediaPlayer.setOnCompletionListener(completitionListener);
 
         try {
             mediaPlayer.setDataSource(f.getAbsolutePath());
@@ -110,6 +113,10 @@ public class Player {
     public int getDuration(){
         return prepared ? mediaPlayer.getDuration() : 0;
 
+    }
+
+    public void setCompletitionListener(MediaPlayer.OnCompletionListener listener){
+        this.completitionListener = listener;
     }
 
 }

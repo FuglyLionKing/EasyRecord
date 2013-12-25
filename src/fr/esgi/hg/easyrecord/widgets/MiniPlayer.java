@@ -1,7 +1,7 @@
 package fr.esgi.hg.easyrecord.widgets;
 
 import android.content.Context;
-import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +43,11 @@ public class MiniPlayer extends LinearLayout {
         }
     };
 
-
+    private Runnable ProgressUpdater = new Runnable() {
+        public void run() {
+            seekbar.setProgress(player.getCurrentPosition());
+        }
+    };
 
     public MiniPlayer(Context context) {
         super(context);
@@ -108,7 +112,12 @@ public class MiniPlayer extends LinearLayout {
             }
         });
 
-
+        player.setCompletitionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                stopUpdate();
+            }
+        });
 
     }
 
@@ -144,17 +153,19 @@ public class MiniPlayer extends LinearLayout {
     }
 
     public void stopUpdate(){
-//        timer.cancel();
-//        timer.purge();
+        timer.cancel();
     }
 
     public void startUpdate(){
-//        stopUpdate();
-//        timer.schedule(updater, 1000, player.getDuration() - player.getCurrentPosition());
+        if(null != timer)
+            timer.cancel();
+
+        timer = new Timer();
+        timer.schedule(updater, 1000, player.getDuration() - player.getCurrentPosition());
     }
 
     private void updateProgress(){
-        seekbar.setProgress(player.getCurrentPosition());
+        post(ProgressUpdater);
     }
 
     public void setFile(File f){

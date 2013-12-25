@@ -79,7 +79,6 @@ private     File selectedRecord;
             case 2:
                 //delete
                 FileTools.delete(selectedRecord);
-//                records.remove(selectedRecord);
                 recordsAdapter.remove(selectedRecord);
                 break;
 
@@ -96,11 +95,10 @@ private     File selectedRecord;
 
 
     public void updateRecords(){
-//        records.clear();
-//        records.addAll(FileTools.getAllRecords());
         recordsAdapter.clear();
         recordsAdapter.addAll(FileTools.getAllRecords());
     }
+
 
 
 }
