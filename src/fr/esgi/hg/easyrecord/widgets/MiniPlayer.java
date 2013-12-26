@@ -3,6 +3,7 @@ package fr.esgi.hg.easyrecord.widgets;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -30,18 +31,11 @@ public class MiniPlayer extends LinearLayout {
 
     private File file = null;
 
-//    private AudioManager am;
-
     private Player player = new Player();
 
-    Timer timer = new Timer();
+    private Timer timer = new Timer();
 
-    TimerTask updater = new TimerTask() {
-        @Override
-        public void run() {
-            updateProgress();
-        }
-    };
+    private TimerTask updater;
 
     private Runnable ProgressUpdater = new Runnable() {
         public void run() {
@@ -95,20 +89,21 @@ public class MiniPlayer extends LinearLayout {
         });
 
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            boolean manualChange = false;
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                //To change body of implemented methods use File | Settings | File Templates.
-                player.seekTo(i);
+                if(manualChange)
+                    player.seekTo(i);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                manualChange = true;
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                manualChange = false;
             }
         });
 
@@ -154,17 +149,26 @@ public class MiniPlayer extends LinearLayout {
 
     public void stopUpdate(){
         timer.cancel();
+        updater.cancel();
     }
 
     public void startUpdate(){
         if(null != timer)
             timer.cancel();
 
+        if(null != updater)
+            updater.cancel();
+
+        //I'm not sure this is the 'properest' way but it works well enough !
+        updater = getNewUpdater();
         timer = new Timer();
-        timer.schedule(updater, 1000, player.getDuration() - player.getCurrentPosition());
+
+        int updateFreq = player.getDuration()/1000;
+        timer.schedule(updater, updateFreq, updateFreq);
     }
 
     private void updateProgress(){
+        //post() runs on Ui's thread
         post(ProgressUpdater);
     }
 
@@ -172,5 +176,15 @@ public class MiniPlayer extends LinearLayout {
         file = f;
     }
 
+    private TimerTask getNewUpdater(){
+        return new TimerTask() {
+            @Override
+            public void run() {
+                //we don't update from this thread
+                //because that's UI's business
+                updateProgress();
+            }
+        };
+    }
 
 }

@@ -8,16 +8,17 @@
     <TextView android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:text="On air (one button lies)"
+              android:text="On air"
               android:textSize="20dp"
               android:layout_centerInParent="true"
             />
-    <TextView android:layout_width="fill_parent"
+    <fr.esgi.hg.easyrecord.widgets.OneTwoThreeFourFiveSixAndMore
+            android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:text="00:01:62"
               android:textSize="20dp"
               android:layout_centerInParent="true"
+              android:id="@+id/timer"
             />
 
     <Button
