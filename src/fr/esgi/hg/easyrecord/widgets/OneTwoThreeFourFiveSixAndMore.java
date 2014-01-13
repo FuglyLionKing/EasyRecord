@@ -103,10 +103,10 @@ public class OneTwoThreeFourFiveSixAndMore extends TextView{
     public void stop(){
         timer.cancel();
         updater.cancel();
+        reset();
     }
 
     public void reset(){
-        stop();
         current.reset();
         setText(current.toString());
     }
