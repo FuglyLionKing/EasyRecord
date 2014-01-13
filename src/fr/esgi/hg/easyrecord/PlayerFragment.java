@@ -1,5 +1,6 @@
 package fr.esgi.hg.easyrecord;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.*;
@@ -21,6 +22,7 @@ public class PlayerFragment extends Fragment {
     private ArrayList<File> records;
 
     //TODO make resource
+    //TODO ajouter l'option de tri !
     private static String[] menuItems = {"Edit", "View information", "Delete"};
 
 
@@ -72,6 +74,10 @@ private     File selectedRecord;
         switch (item.getItemId()){
             case 0:
                 //edit
+                Intent edit = new Intent(getActivity(), EditActivity.class);
+                edit.putExtra("path", selectedRecord.getAbsolutePath());
+                startActivity(edit);
+
                 break;
             case 1:
                 //info
