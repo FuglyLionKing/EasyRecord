@@ -1,6 +1,5 @@
 package fr.esgi.hg.easyrecord.tools;
 
-import android.media.AudioFormat;
 import android.os.Environment;
 
 import java.io.File;
@@ -23,7 +22,6 @@ public class FileTools {
 
     public static File getNewRecordFile(){
         File dir = getAppDirectory();
-
         File f = new File(dir, getNewRecordName());
 
         if(!dir.exists())
@@ -34,7 +32,6 @@ public class FileTools {
 
     public static ArrayList<File> getAllRecords(){
         ArrayList<File> records = new ArrayList<File>();
-
         File dir = getAppDirectory();
 
         if(!dir.exists()) return records;
@@ -43,7 +40,6 @@ public class FileTools {
             if(!f.isDirectory())
                 records.add(f);
         }
-
         return records;
     }
 

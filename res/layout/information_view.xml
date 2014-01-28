@@ -14,19 +14,18 @@
         <LinearLayout android:orientation="horizontal"
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content">
-        <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/title"
-                android:id="@+id/textView"/>
-        <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
-                android:id="@+id/editTitle"
-                android:inputType="text"/>
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/title"
+                    android:id="@+id/textTitleLabel"/>
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:id="@+id/textTitleValue"/>
         </LinearLayout>
         <LinearLayout android:orientation="horizontal"
                       android:layout_width="fill_parent"
@@ -37,15 +36,12 @@
                     android:layout_weight="0.3"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/date_creation"
-                    android:id="@+id/textCreationText"
-                    android:editable="false"/>
-            <EditText
+                    android:id="@+id/textDateLabel"/>
+            <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
-                    android:id="@+id/editCreation"
-                    android:inputType="date"
-                    android:editable="false"/>
+                    android:id="@+id/textCreationValue"/>
         </LinearLayout>
         <LinearLayout android:orientation="horizontal"
                       android:layout_width="fill_parent"
@@ -56,15 +52,12 @@
                     android:layout_weight="0.3"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/date_modification"
-                    android:id="@+id/textModificationLabel"
-                    android:editable="false"/>
-            <EditText
+                    android:id="@+id/textModificationLabel"/>
+            <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
-                    android:id="@+id/editModification"
-                    android:inputType="date"
-                    android:editable="false"/>
+                    android:id="@+id/textModificationValue"/>
         </LinearLayout>
         <LinearLayout android:orientation="horizontal"
                       android:layout_width="fill_parent"
@@ -76,17 +69,16 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/comment"
                     android:id="@+id/textCommentLabel"/>
-            <EditText
+            <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
-                    android:id="@+id/editComment"
-                    android:inputType="textMultiLine"/>
+                    android:id="@+id/textCommentValue"/>
         </LinearLayout>
     </LinearLayout>
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:id="@+id/saveButton"/>
+            android:text="@string/edit"
+            android:id="@+id/modifyButton"/>
 </LinearLayout>

@@ -14,7 +14,7 @@ import java.util.TimerTask;
  * Time: 15:24
  * To change this template use File | Settings | File Templates.
  */
-public class OneTwoThreeFourFiveSixAndMore extends TextView{
+public class RecordTimer extends TextView{
 
     private class TimeTrackKeeper{
 
@@ -59,7 +59,7 @@ public class OneTwoThreeFourFiveSixAndMore extends TextView{
     private TimerTask updater;
     private Runnable ProgressUpdater = new Runnable() {
         public void run() {
-            OneTwoThreeFourFiveSixAndMore.this.setText(current.toString());
+            RecordTimer.this.setText(current.toString());
         }
     };
 
@@ -67,17 +67,17 @@ public class OneTwoThreeFourFiveSixAndMore extends TextView{
 
     public int interval = 1000;
 
-    public OneTwoThreeFourFiveSixAndMore(Context context) {
+    public RecordTimer(Context context) {
         super(context);
         initializer(context,null);
     }
 
-    public OneTwoThreeFourFiveSixAndMore(Context context, AttributeSet attrs) {
+    public RecordTimer(Context context, AttributeSet attrs) {
         super(context, attrs);
         initializer(context,attrs);
     }
 
-    public OneTwoThreeFourFiveSixAndMore(Context context, AttributeSet attrs, int defStyle) {
+    public RecordTimer(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initializer(context,attrs);
     }

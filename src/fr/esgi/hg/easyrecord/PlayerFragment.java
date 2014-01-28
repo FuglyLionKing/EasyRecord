@@ -77,19 +77,19 @@ private     File selectedRecord;
                 Intent edit = new Intent(getActivity(), EditActivity.class);
                 edit.putExtra("path", selectedRecord.getAbsolutePath());
                 startActivity(edit);
-
                 break;
             case 1:
                 //info
+                Intent info = new Intent(getActivity(), InformationActivity.class);
+                info.putExtra("path", selectedRecord.getAbsolutePath());
+                startActivity(info);
                 break;
             case 2:
                 //delete
                 FileTools.delete(selectedRecord);
                 recordsAdapter.remove(selectedRecord);
                 break;
-
         }
-
         return true;
     }
 
@@ -99,12 +99,8 @@ private     File selectedRecord;
         updateRecords();
     }
 
-
     public void updateRecords(){
         recordsAdapter.clear();
         recordsAdapter.addAll(FileTools.getAllRecords());
     }
-
-
-
 }

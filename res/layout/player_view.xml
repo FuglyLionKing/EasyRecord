@@ -9,9 +9,6 @@
           android:layout_height="0dp"
           android:layout_weight="1"
           android:id="@+id/recordsList"
-
-          android:layout_alignBottom="@+id/player"
-
         />
 
 
@@ -19,11 +16,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/player"
-
     />
 
 </LinearLayout>
-
-
-        <!--android:layout_alignParentLeft="true" android:layout_alignParentTop="true"-->
-        <!-- android:layout_alignLeft="@+id/recordsList" android:layout_alignParentBottom="true" -->

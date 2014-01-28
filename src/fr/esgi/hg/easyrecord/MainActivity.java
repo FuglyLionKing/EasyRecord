@@ -11,6 +11,19 @@ import fr.esgi.hg.easyrecord.adapter.TabsPagerAdapter;
 
 import java.io.File;
 
+
+/**
+ * TODO :
+ * Recuperer les informations du title dans le listing
+ * Mettres des poids sur la vue de Record
+ *Mettre l'action de record sur le bouton et sur l'image
+ * (Changer le text du bouton "Record" en "Stop" lors du record)
+ * Supprimer le record de la base a l'appui sur le bouton Delete
+ *
+ *
+ * Refaire une revue rapide des layouts
+ *
+ */
 public class MainActivity extends FragmentActivity implements
         ActionBar.TabListener {
 

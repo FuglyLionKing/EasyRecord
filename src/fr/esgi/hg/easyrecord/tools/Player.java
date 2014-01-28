@@ -102,9 +102,8 @@ public class Player {
     }
 
     public boolean isPlaying(){
-        return prepared ? mediaPlayer.isPlaying() : false;
+        return prepared && mediaPlayer.isPlaying();
     }
-
 
     public int getCurrentPosition(){
         return prepared ? mediaPlayer.getCurrentPosition() : 0;

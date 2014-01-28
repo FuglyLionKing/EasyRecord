@@ -1,45 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
+              android:layout_width="match_parent"
               android:layout_height="fill_parent"
-              android:orientation="vertical">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:gravity="center_vertical">
+    <LinearLayout android:layout_width="fill_parent"
                   android:layout_height="0dp"
                   android:orientation="vertical"
-                  android:gravity="center_vertical"
-            android:layout_weight="1">
-        <LinearLayout android:layout_width="fill_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="vertical"
-                      android:gravity="center_horizontal">
-            <TextView android:layout_width="fill_parent"
-                      android:layout_height="wrap_content"
-                      android:gravity="center"
-                      android:text="On Air"
-                      android:textSize="60dp"
-                      android:layout_centerInParent="true"
-                      android:textColor="#ff0000"/>
-            <fr.esgi.hg.easyrecord.widgets.OneTwoThreeFourFiveSixAndMore
-                    android:layout_width="fill_parent"
-                      android:layout_height="wrap_content"
-                      android:gravity="center"
-                      android:textSize="90dp"
-                      android:layout_centerInParent="true"
-                      android:id="@+id/timer"
-                      android:layout_marginBottom="20dp"
-                    />
-            <ImageView
-                    android:layout_width="97dp"
-                    android:layout_height="86dp"
-                    android:id="@+id/imageView" android:src="@drawable/microphone"
-                    />
-        </LinearLayout>
+                  android:gravity="center_horizontal"
+                  android:layout_weight="1">
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:text="@string/on_air"
+                  android:id="@+id/recordLabel"
+                  android:textSize="60sp"
+                  android:textColor="#333333"
+                  android:layout_margin="10dp"/>
+        <fr.esgi.hg.easyrecord.widgets.RecordTimer
+                android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:textSize="80sp"
+                  android:id="@+id/timer"
+                  android:layout_marginBottom="20dp"
+                />
+        <ImageButton
+                android:layout_width="110dp"
+                android:layout_height="130dp"
+                android:src="@drawable/microphone"
+                android:id="@+id/recordButton"
+                android:background="@null"
+                android:contentDescription="micPicture"
+                />
     </LinearLayout>
-    <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:id="@+id/startrecord"
-            />
+    <Button android:layout_width="match_parent" android:layout_height="75dp" android:text="Record" />
 </LinearLayout>

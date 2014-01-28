@@ -3,4 +3,18 @@
     <string name="app_name">EasyRecord</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="on_air">On Air!</string>
+    <string name="record">Record</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="resume">Resume</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="view_info">View information</string>
+    <string name="delete">Delete</string>
+    <string name="title">Title</string>
+    <string name="date_creation">Creation</string>
+    <string name="date_modification">Modification</string>
+    <string name="comment">Comment</string>
 </resources>
