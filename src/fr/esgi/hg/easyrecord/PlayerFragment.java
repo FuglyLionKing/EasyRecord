@@ -144,6 +144,7 @@ public class PlayerFragment extends Fragment {
                 //delete
                 FileTools.delete(selectedRecord);
                 recordsAdapter.remove(selectedRecord);
+                dbController.deleteRecord(selectedRecord.getAbsolutePath());
                 break;
         }
         return true;

@@ -75,8 +75,8 @@ public class RecorderFragment extends Fragment {
                     recording = false;
                     timer.stop();
                     if (null != onRecorded) {
-                        onRecorded.onSoundRecorded(file);
                         insertRecord(file);
+                        onRecorded.onSoundRecorded(file);
                     }
                     if(text != null) {
                         text.setTextColor(Color.parseColor("#333333"));
@@ -110,7 +110,8 @@ public class RecorderFragment extends Fragment {
 
         Record record = new Record();
         record.path = file.getAbsolutePath();
-        record.title = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+        //meta are empty by default, so that's useless -> file's name
+        record.title = file.getName();//mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
         record.creationDate = new Date().toString();
         record.modificationDate = new Date(file.lastModified()).toString();
         record.comment = "";

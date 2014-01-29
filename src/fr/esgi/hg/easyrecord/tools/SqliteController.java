@@ -57,6 +57,14 @@ public class SqliteController extends SQLiteOpenHelper {
         return 0;
     }
 
+    public int deleteRecord(String recordPath) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        if (database != null) {
+            database.delete("record","id" + " = ?", new String[] { recordPath });
+        }
+        return 0;
+    }
+
     public Record selectRecord(String id) {
         SQLiteDatabase database = this.getReadableDatabase();
         String selectQuery = "SELECT title, creationDate, modificationDate, comment FROM record WHERE id='"+id+"'";
