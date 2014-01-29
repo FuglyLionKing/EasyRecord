@@ -34,5 +34,5 @@
                 android:contentDescription="micPicture"
                 />
     </LinearLayout>
-    <Button android:layout_width="match_parent" android:layout_height="75dp" android:text="Record" />
+    <Button android:layout_width="match_parent" android:layout_height="75dp" android:text="Record" android:id="@+id/textRecordButton" />
 </LinearLayout>

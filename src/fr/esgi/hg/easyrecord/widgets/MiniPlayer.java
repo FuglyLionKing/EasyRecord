@@ -25,7 +25,7 @@ import java.util.TimerTask;
 public class MiniPlayer extends LinearLayout {
 
     private Button pauseResume;
-    private Button back;
+    private Button playStop;
     private SeekBar seekbar;
 
     private File file = null;
@@ -63,7 +63,7 @@ public class MiniPlayer extends LinearLayout {
         this.setOrientation(LinearLayout.VERTICAL);
 
         seekbar = (SeekBar) getChildAt(0);
-        back = (Button) ((LinearLayout)getChildAt(1)).getChildAt(0);
+        playStop = (Button) ((LinearLayout)getChildAt(1)).getChildAt(0);
         pauseResume = (Button) ((LinearLayout)getChildAt(1)).getChildAt(1);
 
 
@@ -77,7 +77,7 @@ public class MiniPlayer extends LinearLayout {
             }
         });
 
-        back.setOnClickListener(new OnClickListener() {
+        playStop.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (player.isPlaying())
@@ -120,6 +120,10 @@ public class MiniPlayer extends LinearLayout {
         if(null != file && file.exists())
             player.start(file);
 
+
+        playStop.setText("stop");
+        pauseResume.setText("pause");
+
         seekbar.setMax(player.getDuration());
         seekbar.setProgress(0);
 
@@ -129,11 +133,19 @@ public class MiniPlayer extends LinearLayout {
     public void pause(){
         player.pause();
 
+
+        playStop.setText("stop");
+        pauseResume.setText("resume");
+
         stopUpdate();
     }
 
     public void resume(){
         player.resume();
+
+
+        playStop.setText("stop");
+        pauseResume.setText("pause");
 
         startUpdate();
     }
@@ -142,11 +154,17 @@ public class MiniPlayer extends LinearLayout {
         player.stop();
         seekbar.setProgress(0);
 
+        playStop.setText("play");
+        pauseResume.setText("pause");
+
         stopUpdate();
 
     }
 
     public void stopUpdate(){
+        if(null == timer)
+            return;
+
         timer.cancel();
         updater.cancel();
     }
@@ -163,6 +181,9 @@ public class MiniPlayer extends LinearLayout {
         timer = new Timer();
 
         int updateFreq = player.getDuration()/1000;
+        if(0 >= updateFreq)
+            return;
+
         timer.schedule(updater, updateFreq, updateFreq);
     }
 

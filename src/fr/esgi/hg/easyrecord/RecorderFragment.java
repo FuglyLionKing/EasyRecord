@@ -1,5 +1,6 @@
 package fr.esgi.hg.easyrecord;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaRecorder;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +60,9 @@ public class RecorderFragment extends Fragment {
         final MicRecorder recorder = new MicRecorder(MediaRecorder.OutputFormat.THREE_GPP, MediaRecorder.AudioEncoder.AMR_NB);
 
         ImageButton button = (ImageButton) rootView.findViewById(R.id.recordButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button textButton = (Button) rootView.findViewById(R.id.textRecordButton);
+
+        View.OnClickListener onClick = new View.OnClickListener() {
             File file;
 
             @Override
@@ -93,7 +97,10 @@ public class RecorderFragment extends Fragment {
                     recording = true;
                 }
             }
-        });
+        };
+
+        button.setOnClickListener(onClick);
+        textButton.setOnClickListener(onClick);
 		return rootView;
 	}
 
